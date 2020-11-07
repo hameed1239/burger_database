@@ -11,20 +11,25 @@ router.get('/burgers', (req,res)=>{
         const hbsObject = {
             burger: dbBurger //create an object and assign db res as value
         }
+        console.log (hbsObject);
         return res.render('index', hbsObject)
-    })
+    });
 });
 
-router.post('/burger/create', (req,res)=>{
+router.post('/burgers/create', (req,res)=>{
     //handle creating a burger
     Burger.create({
         burger_name: req.body.burger_name
-    }).then(dbBurger =>{
-        res.redirect('/');
     })
-})
+    //pass the result or our call
+    .then(dbBurger =>{
+        console.log (dbBurger);
+        //redirect
+        res.redirect('/');
+    });
+});
 
-router.put('/burger/update', (req, res) =>{
+router.put('/burgers/update', (req, res) =>{
     //update devoured to true
     Burger.update({
         devoured:true
@@ -34,6 +39,9 @@ router.put('/burger/update', (req, res) =>{
             id : req.body.burger_id
         }
     }).then(dbBurger =>{
+        console.log(dbBurger)
         res.json('/');
     });
 });
+
+module.exports = router;

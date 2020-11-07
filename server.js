@@ -29,13 +29,13 @@ app.engine('handlebars', exphbs({
 
 //set template engine to be loaded by express 
 app.set('view engine', 'handlebars');
-const routes = require('./controllers/burgers_controller')
+var routes = require('./controllers/burgers_controller')
 app.use(routes);
 
 //listen on port 3001
 const PORT = process.env.PORT || 3001 //the reason we do this is to give heroku the
 
-sequelize.afterSync({ force: false}).then(() =>{
+sequelize.sync({ force: false}).then(() =>{
     app.listen(PORT,()=>{
         console.log(`App started on port ${PORT}`);
     })
